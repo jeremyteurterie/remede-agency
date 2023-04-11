@@ -5,10 +5,12 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import Error404 from './pages/Error404';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Root />}>
-      <Route path="dashboard" element={<Dashboard />} />
+    <Route path="/" element={<Error404 />}>
+      <Route path="*" element={<Error404 />} />
     </Route>
   )
 );
