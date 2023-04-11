@@ -14,29 +14,31 @@ const SignIn = () => {
       <header>
         <Header />
       </header>
-      <main className={styles.mainsignin}>
-        <section className={styles.signincontent}>
-          <i className={styles.signinicon}>
-            <FontAwesomeIcon icon={faCircleUser} />
-          </i>
-          <h1>Sign In</h1>
-          <form>
-            <div className={styles.inputwrapper}>
-              <label for="username">Username</label>
-              <input type="text" id="username" />
-            </div>
-            <div className={styles.inputwrapper}>
-              <label for="password">Password</label>
-              <input type="password" id="password" />
-            </div>
-            <div className={styles.inputremember}>
-              <input type="checkbox" id="remember-me" />
-              <label for="remember-me">Remember me</label>
-            </div>
-            <button className="signinbutton">Sign In</button>
-          </form>
-        </section>
-      </main>
+      <div className={styles.main}>
+        <main className={styles.mainsignin}>
+          <section className={styles.signincontent}>
+            <i className={styles.signinicon}>
+              <FontAwesomeIcon icon={faCircleUser} />
+            </i>
+            <h1>Sign In</h1>
+            <form>
+              <div className={styles.inputwrapper}>
+                <label for="username">Username</label>
+                <input type="text" id="username" />
+              </div>
+              <div className={styles.inputwrapper}>
+                <label for="password">Password</label>
+                <input type="password" id="password" />
+              </div>
+              <div className={styles.inputremember}>
+                <input type="checkbox" id="remember-me" />
+                <label for="remember-me">Remember me</label>
+              </div>
+              <button className={styles.signinbutton}>Sign In</button>
+            </form>
+          </section>
+        </main>
+      </div>
       <footer>
         <Footer />
       </footer>
