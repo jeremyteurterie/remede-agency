@@ -1,11 +1,18 @@
 import React from 'react';
+// components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+// styles & assets
 import styles from '../styles/Home.module.css';
 import iconchat from '../assets/img/icon-chat.png';
 import iconmoney from '../assets/img/icon-money.png';
 import iconsecurity from '../assets/img/icon-security.png';
 
+/**
+ * React component representing the home page of the application.
+ * @function Home
+ * @returns {JSX.Element} The home page content.
+ */
 const Home = () => {
   return (
     <>
