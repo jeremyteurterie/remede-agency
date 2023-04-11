@@ -24,8 +24,8 @@ const Header = () => {
         </a>
         <div>
           {' '}
-          <i>
-            <FontAwesomeIcon icon={faCircleUser} size="lg" />
+          <i className={styles.signinicon}>
+            <FontAwesomeIcon icon={faCircleUser} />
           </i>
           <a className={styles.mainnavitem} href="">
             Sign In
