@@ -1,15 +1,12 @@
-.container {
-  justify-content: center;
-  align-items: center;
-}
-
 .errorpage {
-  display: flex;
-  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .errorpage * {
-  margin: auto;
+  margin: 0.3rem;
 }
 
 .errorpage h2 {
