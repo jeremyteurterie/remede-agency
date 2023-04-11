@@ -23,7 +23,6 @@ const Header = () => {
           <h1 className={styles.sronly}>Argent Bank</h1>
         </a>
         <div>
-          {' '}
           <i className={styles.signinicon}>
             <FontAwesomeIcon icon={faCircleUser} />
           </i>
