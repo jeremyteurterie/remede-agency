@@ -1,3 +1,8 @@
+.main {
+  display: flex;
+  min-height: 85vh;
+}
+
 .mainsignin {
   flex: 1;
   background-color: #12002b;
@@ -25,7 +30,7 @@
 }
 
 .signinicon {
-  font-size: 5rem;
+  font-size: 2rem;
 }
 
 .inputremember {
