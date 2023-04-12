@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/Header.module.css';
 import logo from '../assets/img/argentBankLogo.png';
 
@@ -19,16 +17,9 @@ const Header = () => {
             <h1 className={styles.sronly}>Argent Bank</h1>
           </a>
         </Link>
-        <div>
-          <Link to="/signin">
-            <a className={styles.mainnavitem}>
-              <i className={styles.signinicon}>
-                <FontAwesomeIcon icon={faCircleUser} />
-              </i>
-              Sign In
-            </a>
-          </Link>
-        </div>
+        {/* <div>
+          <ButtonSignIn />
+        </div> */}
       </nav>
     </header>
   );
