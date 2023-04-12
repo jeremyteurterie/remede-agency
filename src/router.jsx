@@ -7,6 +7,7 @@ import {
 
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
+import User from './pages/User';
 import Error404 from './pages/Error404';
 
 const router = createBrowserRouter(
@@ -16,6 +17,11 @@ const router = createBrowserRouter(
       <Route
         path="/signin"
         element={<SignIn />}
+        errorElement={<Error404 />}
+      ></Route>
+      <Route
+        path="/user"
+        element={<User />}
         errorElement={<Error404 />}
       ></Route>
       <Route path="*" element={<Error404 />}></Route>
