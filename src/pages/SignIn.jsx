@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -34,7 +34,11 @@ const SignIn = () => {
                 <input type="checkbox" id="remember-me" />
                 <label for="remember-me">Remember me</label>
               </div>
-              <button className={styles.signinbutton}>Sign In</button>
+              <Link to="/user">
+                <button href="/user" className={styles.signinbutton}>
+                  Sign In
+                </button>
+              </Link>
             </form>
           </section>
         </main>
