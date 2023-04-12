@@ -12,6 +12,11 @@
   white-space: nowrap !important; /* 3 */
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .mainnav {
   display: flex;
   justify-content: space-between;
@@ -28,12 +33,6 @@
   color: #42b983;
 }
 
-.mainnavitem {
-  text-decoration: none;
-  margin-right: 0.5rem;
-  margin-left: 0.3rem;
-}
-
 .mainnavitem:hover {
   text-decoration: underline;
 }
@@ -46,9 +45,4 @@
 .mainnavlogoimage {
   max-width: 100%;
   width: 200px;
-}
-
-.signinicon {
-  font-size: 1rem;
-  margin-right: 0.3rem;
 }
