@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ButtonSignIn from '../components/ButtonSignIn';
 import styles from '../styles/Home.module.css';
 import iconchat from '../assets/img/icon-chat.png';
 import iconmoney from '../assets/img/icon-money.png';
@@ -11,6 +12,7 @@ const Home = () => {
     <>
       <header>
         <Header />
+        <ButtonSignIn />
       </header>
       <main>
         <div className={styles.hero}>
