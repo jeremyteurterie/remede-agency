@@ -1,8 +1,6 @@
 import React from 'react';
-
 import HeaderUser from '../components/HeaderUser';
 import Footer from '../components/Footer';
-
 import styles from '../styles/User.module.css';
 
 const User = () => {

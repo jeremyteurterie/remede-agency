@@ -6,14 +6,9 @@ import {
   faCircleUser,
   faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
-// styles & assets
 import styles from '../styles/Header.module.css';
 import logo from '../assets/img/argentBankLogo.png';
 
-/**
- *Header component that displays the Argent Bank logo and navigation links.
- *@returns {JSX.Element} JSX.Element representing the Header component.
- */
 const HeaderUser = () => {
   return (
     <header>
