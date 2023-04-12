@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // modules
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
@@ -14,21 +15,25 @@ const Header = () => {
   return (
     <header>
       <nav className={styles.mainnav}>
-        <a className={styles.mainnavlogo} href="/">
-          <img
-            className={styles.mainnavlogoimage}
-            src={logo}
-            alt="Argent Bank Logo"
-          />
-          <h1 className={styles.sronly}>Argent Bank</h1>
-        </a>
-        <div>
-          <a className={styles.mainnavitem} href="">
-            <i className={styles.signinicon}>
-              <FontAwesomeIcon icon={faCircleUser} />
-            </i>
-            Sign In
+        <Link to="/">
+          <a className={styles.mainnavlogo}>
+            <img
+              className={styles.mainnavlogoimage}
+              src={logo}
+              alt="Argent Bank Logo"
+            />
+            <h1 className={styles.sronly}>Argent Bank</h1>
           </a>
+        </Link>
+        <div>
+          <Link to="/signin">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faCircleUser} />
+              </i>
+              Sign In
+            </a>
+          </Link>
         </div>
       </nav>
     </header>

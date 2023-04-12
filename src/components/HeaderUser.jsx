@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // modules
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -17,27 +18,33 @@ const HeaderUser = () => {
   return (
     <header>
       <nav className={styles.mainnav}>
-        <a className={styles.mainnavlogo} href="/">
-          <img
-            className={styles.mainnavlogoimage}
-            src={logo}
-            alt="Argent Bank Logo"
-          />
-          <h1 className={styles.sronly}>Argent Bank</h1>
-        </a>
+        <Link to="/">
+          <a className={styles.mainnavlogo}>
+            <img
+              className={styles.mainnavlogoimage}
+              src={logo}
+              alt="Argent Bank Logo"
+            />
+            <h1 className={styles.sronly}>Argent Bank</h1>
+          </a>
+        </Link>
         <div>
-          <a className={styles.mainnavitem} href="">
-            <i className={styles.signinicon}>
-              <FontAwesomeIcon icon={faCircleUser} />
-            </i>
-            Tony
-          </a>
-          <a className={styles.mainnavitem} href="">
-            <i className={styles.signinicon}>
-              <FontAwesomeIcon icon={faRightFromBracket} />
-            </i>
-            Sign Out
-          </a>
+          <Link to="/user">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faCircleUser} />
+              </i>
+              Tony
+            </a>
+          </Link>
+          <Link to="/">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </i>
+              Sign Out
+            </a>
+          </Link>
         </div>
       </nav>
     </header>
