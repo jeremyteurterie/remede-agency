@@ -17,9 +17,6 @@ const Header = () => {
             <h1 className={styles.sronly}>Argent Bank</h1>
           </a>
         </Link>
-        {/* <div>
-          <ButtonSignIn />
-        </div> */}
       </nav>
     </header>
   );
