@@ -2,6 +2,11 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ButtonSignOut from '../components/ButtonSignOut';
+import ButtonTransactions from '../components/ButtonTransactions';
+import ButtonEdit from '../components/ButtonEdit';
+import AccountChecking from '../components/AccountChecking';
+import AccountSavings from '../components/AccountSavings';
+import AccountCreditCard from '../components/AccountCreditCard';
 import styles from '../styles/User.module.css';
 
 const User = () => {
@@ -13,60 +18,19 @@ const User = () => {
       </header>
       <div className={styles.main}>
         <div className={styles.mainuser}>
-          <div className={styles.header}>
-            <h1>
-              Welcome back
-              <br />
-              Tony Jarvis!
-            </h1>
-            <button className={styles.editbutton}>Edit Name</button>
-          </div>
           <h2 className={styles.sronly}>Accounts</h2>
+          <ButtonEdit />
           <section className={styles.account}>
-            <div className={styles.accountcontentwrapper}>
-              <h3 className={styles.accounttitle}>
-                Argent Bank Checking (x8349)
-              </h3>
-              <p className={styles.accountamount}>$2,082.79</p>
-              <p className={styles.accountamountdescription}>
-                Available Balance
-              </p>
-            </div>
-            <div className={styles.accountcontentwrapper + ' ' + styles.cta}>
-              <button className={styles.transactionbutton}>
-                View transactions
-              </button>
-            </div>
+            <AccountChecking />
+            <ButtonTransactions />
           </section>
           <section className={styles.account}>
-            <div className={styles.accountcontentwrapper}>
-              <h3 className={styles.accounttitle}>
-                Argent Bank Savings (x6712)
-              </h3>
-              <p className={styles.accountamount}>$10,928.42</p>
-              <p className={styles.accountamountdescription}>
-                Available Balance
-              </p>
-            </div>
-            <div className={styles.accountcontentwrapper + ' ' + styles.cta}>
-              <button className={styles.transactionbutton}>
-                View transactions
-              </button>
-            </div>
+            <AccountSavings />
+            <ButtonTransactions />
           </section>
           <section className={styles.account}>
-            <div className={styles.accountcontentwrapper}>
-              <h3 className={styles.accounttitle}>
-                Argent Bank Credit Card (x8349)
-              </h3>
-              <p className={styles.accountamount}>$184.30</p>
-              <p className={styles.accountamountdescription}>Current Balance</p>
-            </div>
-            <div className={styles.accountcontentwrapper + ' ' + styles.cta}>
-              <button className={styles.transactionbutton}>
-                View transactions
-              </button>
-            </div>
+            <AccountCreditCard />
+            <ButtonTransactions />
           </section>
         </div>
       </div>
