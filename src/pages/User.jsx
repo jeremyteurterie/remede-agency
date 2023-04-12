@@ -1,13 +1,15 @@
 import React from 'react';
-import HeaderUser from '../components/HeaderUser';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ButtonSignOut from '../components/ButtonSignOut';
 import styles from '../styles/User.module.css';
 
 const User = () => {
   return (
     <>
       <header>
-        <HeaderUser />
+        <Header />
+        <ButtonSignOut />
       </header>
       <div className={styles.main}>
         <div className={styles.mainuser}>
