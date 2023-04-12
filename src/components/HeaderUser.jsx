@@ -10,7 +10,7 @@ import logo from '../assets/img/argentBankLogo.png';
  *Header component that displays the Argent Bank logo and navigation links.
  *@returns {JSX.Element} JSX.Element representing the Header component.
  */
-const Header = () => {
+const HeaderUser = () => {
   return (
     <header>
       <nav className={styles.mainnav}>
@@ -23,11 +23,11 @@ const Header = () => {
           <h1 className={styles.sronly}>Argent Bank</h1>
         </a>
         <div>
+          <i className={styles.signinicon}>
+            <FontAwesomeIcon icon={faCircleUser} />
+          </i>
           <a className={styles.mainnavitem} href="">
-            <i className={styles.signinicon}>
-              <FontAwesomeIcon icon={faCircleUser} />
-            </i>
-            Sign In
+            Tony
           </a>
         </div>
       </nav>
@@ -35,4 +35,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderUser;
