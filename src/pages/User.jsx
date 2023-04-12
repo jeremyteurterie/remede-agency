@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ButtonSignOut from '../components/ButtonSignOut';
-import ButtonTransactions from '../components/ButtonTransactions';
+import ButtonTransaction from '../components/ButtonTransaction';
 import ButtonEdit from '../components/ButtonEdit';
 import AccountChecking from '../components/AccountChecking';
 import AccountSavings from '../components/AccountSavings';
@@ -22,15 +22,15 @@ const User = () => {
           <ButtonEdit />
           <section className={styles.account}>
             <AccountChecking />
-            <ButtonTransactions />
+            <ButtonTransaction />
           </section>
           <section className={styles.account}>
             <AccountSavings />
-            <ButtonTransactions />
+            <ButtonTransaction />
           </section>
           <section className={styles.account}>
             <AccountCreditCard />
-            <ButtonTransactions />
+            <ButtonTransaction />
           </section>
         </div>
       </div>
