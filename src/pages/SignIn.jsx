@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ButtonSignIn from '../components/ButtonSignIn';
@@ -15,6 +17,10 @@ const SignIn = () => {
       <div className={styles.main}>
         <main className={styles.mainsignin}>
           <section className={styles.signincontent}>
+            <i className={styles.signinicon}>
+              <FontAwesomeIcon icon={faCircleUser} />
+            </i>
+            <h1>Sign In</h1>
             <form>
               <div className={styles.inputwrapper}>
                 <label for="username">Username</label>
