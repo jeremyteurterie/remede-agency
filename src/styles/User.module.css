@@ -8,12 +8,6 @@
   background-color: #12002b;
 }
 
-.header {
-  flex: 1;
-  color: #fff;
-  margin-bottom: 2rem;
-}
-
 .sronly {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
@@ -26,26 +20,6 @@
   position: absolute !important;
   width: 1px !important;
   white-space: nowrap !important; /* 3 */
-}
-
-.editbutton {
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px;
-}
-
-.transactionbutton {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
 }
 
 .account {
@@ -63,28 +37,6 @@
   margin-bottom: 2rem;
 }
 
-.accountamount {
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: bold;
-}
-
-.accountamountdescription {
-  margin: 0;
-}
-
-.accounttitle {
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
-  font-weight: normal;
-}
-
-.accountcontentwrapper {
-  width: 100%;
-  flex: 1;
-}
-
 @media (min-width: 720px) {
   .account {
     flex-direction: row;
@@ -96,9 +48,5 @@
 
   .cta {
     flex: 0;
-  }
-
-  .transactionbutton {
-    width: 200px;
   }
 }
