@@ -1,13 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ButtonSignIn from '../components/ButtonSignIn';
+import Auth from '../services/auth';
 import styles from '../styles/SignIn.module.css';
 
 const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    Auth.login(email, password)
+      .then(() => {
+        navigate('/user');
+      })
+      .catch((error) => {
+        setError(error.response.data.message);
+      });
+  };
+
   return (
     <>
       <header>
@@ -21,24 +38,33 @@ const SignIn = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
             <h1>Sign In</h1>
-            <form>
+            <form onSubmit={handleLogin}>
               <div className={styles.inputwrapper}>
-                <label for="username">Username</label>
-                <input type="text" id="username" />
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
               </div>
               <div className={styles.inputwrapper}>
-                <label for="password">Password</label>
-                <input type="password" id="password" />
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
               </div>
               <div className={styles.inputremember}>
                 <input type="checkbox" id="remember-me" />
-                <label for="remember-me">Remember me</label>
+                <label htmlFor="remember-me">Remember me</label>
               </div>
-              <Link to="/user">
-                <button href="/user" className={styles.signinbutton}>
-                  Sign In
-                </button>
-              </Link>
+              {error && <div className={styles.error}>{error}</div>}
+              <button type="submit" className={styles.signinbutton}>
+                Sign In
+              </button>
             </form>
           </section>
         </main>
