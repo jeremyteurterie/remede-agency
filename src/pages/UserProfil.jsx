@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // modules
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,10 +9,21 @@ import {
 // components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+// services
+import Auth from '../services/auth';
 // styles
 import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const currentUser = Auth.getCurrentUser();
+    setUser(currentUser);
+  }, []);
+
+  console.log(user);
+
   return (
     <>
       <header>
@@ -23,7 +34,6 @@ const UserProfil = () => {
               <i className={styles.signinicon}>
                 <FontAwesomeIcon icon={faCircleUser} />
               </i>
-              Tony
             </a>
           </Link>
           <Link to="/">
@@ -42,7 +52,6 @@ const UserProfil = () => {
             <h1>
               Welcome back
               <br />
-              Tony Jarvis!
             </h1>
             <button className={styles.editbutton}>Edit Name</button>
           </div>

@@ -1,11 +1,12 @@
 import API from '../services/api';
 
-const AuthService = {
+const Auth = {
   login: (email, password) => {
     return API.post(`/api/v1/user/login`, { email, password }).then(
       (response) => {
         if (response.data.accessToken) {
           localStorage.setItem('user', JSON.stringify(response.data));
+          console.log(response.data);
         }
         return response.data;
       }
@@ -16,18 +17,33 @@ const AuthService = {
     localStorage.removeItem('user');
   },
 
-  register: (firstName, lastName, email, password) => {
-    return axios.post(`${API_URL}/api/v1/user/signup`, {
-      firstName,
-      lastName,
-      email,
-      password,
-    });
-  },
+  AuthService.login('exemple@email.com', 'motdepasse')
+  .then((user) => {
+    console.log('Utilisateur enregistré avec succès', user);
+  })
+  .catch((error) => {
+    console.log('Erreur lors de l\'enregistrement de l\'utilisateur', error);
+  });
 
   getCurrentUser: () => {
-    return JSON.parse(localStorage.getItem('user'));
+    if (localStorage.hasOwnProperty('user')) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      console.log(user);
+      return user;
+    } else {
+      console.log('La clé "user" n\'existe pas dans le stockage local.');
+      return null;
+    }
+  },
+
+  getUserInfo: () => {
+    const user = Auth.getCurrentUser();
+    if (user) {
+      const { firstName, lastName } = user;
+      return { firstName, lastName };
+    }
+    return null;
   },
 };
 
-export default AuthService;
+export default Auth;
