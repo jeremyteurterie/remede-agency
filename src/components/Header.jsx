@@ -1,5 +1,7 @@
 import React from 'react';
+// modules
 import { Link } from 'react-router-dom';
+// styles & assets
 import styles from '../styles/Header.module.css';
 import logo from '../assets/img/argentBankLogo.png';
 

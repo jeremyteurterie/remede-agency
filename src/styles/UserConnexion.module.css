@@ -3,6 +3,37 @@
   min-height: 85vh;
 }
 
+.mainnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.mainnav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.mainnav a.router-link-exact-active {
+  color: #42b983;
+}
+
+.mainnavitem {
+  text-decoration: none;
+  margin-right: 0.5rem;
+  margin-left: 0.3rem;
+}
+
+.mainnavitem:hover {
+  text-decoration: underline;
+}
+
+.signinicon {
+  font-size: 1rem;
+  margin-right: 0.3rem;
+}
+
 .mainsignin {
   flex: 1;
   background-color: #12002b;
@@ -27,10 +58,6 @@
   margin: 0 auto;
   margin-top: 3rem;
   padding: 2rem;
-}
-
-.signinicon {
-  font-size: 2rem;
 }
 
 .inputremember {
