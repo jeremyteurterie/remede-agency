@@ -4,6 +4,7 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
+// pages
 import Home from './pages/Home';
 import UserConnexion from './pages/UserConnexion';
 import UserProfil from './pages/UserProfil';

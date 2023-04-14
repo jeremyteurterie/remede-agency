@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+// modules
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+// components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+// services
 import Auth from '../services/auth';
+// styles
 import styles from '../styles/UserConnexion.module.css';
 
 const UserConnexion = () => {

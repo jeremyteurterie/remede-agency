@@ -1,12 +1,15 @@
 import React from 'react';
+// modules
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleUser,
   faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
+// components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+// styles
 import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
