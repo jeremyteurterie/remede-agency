@@ -4,9 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ButtonSignIn from '../components/ButtonSignIn';
 import Auth from '../services/auth';
-import styles from '../styles/SignIn.module.css';
+import styles from '../styles/UserConnexion.module.css';
 
 const UserConnexion = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +28,16 @@ const UserConnexion = () => {
     <>
       <header>
         <Header />
-        <ButtonSignIn />
+        <nav className={styles.mainnav}>
+          <Link to="/connexion">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faCircleUser} />
+              </i>
+              Sign In
+            </a>
+          </Link>
+        </nav>
       </header>
       <div className={styles.main}>
         <main className={styles.mainsignin}>

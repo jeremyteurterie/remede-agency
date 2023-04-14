@@ -1,36 +1,94 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCircleUser,
+  faRightFromBracket,
+} from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ButtonSignOut from '../components/ButtonSignOut';
-import ButtonTransaction from '../components/ButtonTransaction';
-import ButtonEdit from '../components/ButtonEdit';
-import AccountChecking from '../components/AccountChecking';
-import AccountSavings from '../components/AccountSavings';
-import AccountCreditCard from '../components/AccountCreditCard';
-import styles from '../styles/User.module.css';
+import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
   return (
     <>
       <header>
         <Header />
-        <ButtonSignOut />
+        <nav className={styles.mainnav}>
+          <Link to="/user">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faCircleUser} />
+              </i>
+              Tony
+            </a>
+          </Link>
+          <Link to="/">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </i>
+              Sign Out
+            </a>
+          </Link>
+        </nav>
       </header>
       <div className={styles.main}>
         <div className={styles.mainuser}>
+          <div className={styles.header}>
+            <h1>
+              Welcome back
+              <br />
+              Tony Jarvis!
+            </h1>
+            <button className={styles.editbutton}>Edit Name</button>
+          </div>
           <h2 className={styles.sronly}>Accounts</h2>
-          <ButtonEdit />
           <section className={styles.account}>
-            <AccountChecking />
-            <ButtonTransaction />
+            <div className={styles.accountcontentwrapper}>
+              <h3 className={styles.accounttitle}>
+                Argent Bank Checking (x8349)
+              </h3>
+              <p className={styles.accountamount}>$2,082.79</p>
+              <p className={styles.accountamountdescription}>
+                Available Balance
+              </p>
+            </div>
+            <div className={styles.accountcontentwrapper + ' ' + styles.cta}>
+              <button className={styles.transactionbutton}>
+                View transactions
+              </button>
+            </div>
           </section>
           <section className={styles.account}>
-            <AccountSavings />
-            <ButtonTransaction />
+            <div className={styles.accountcontentwrapper}>
+              <h3 className={styles.accounttitle}>
+                Argent Bank Savings (x6712)
+              </h3>
+              <p className={styles.accountamount}>$10,928.42</p>
+              <p className={styles.accountamountdescription}>
+                Available Balance
+              </p>
+            </div>
+            <div className={styles.accountcontentwrapper + ' ' + styles.cta}>
+              <button className={styles.transactionbutton}>
+                View transactions
+              </button>
+            </div>
           </section>
           <section className={styles.account}>
-            <AccountCreditCard />
-            <ButtonTransaction />
+            <div className={styles.accountcontentwrapper}>
+              <h3 className={styles.accounttitle}>
+                Argent Bank Credit Card (x8349)
+              </h3>
+              <p className={styles.accountamount}>$184.30</p>
+              <p className={styles.accountamountdescription}>Current Balance</p>
+            </div>
+            <div className={styles.accountcontentwrapper + ' ' + styles.cta}>
+              <button className={styles.transactionbutton}>
+                View transactions
+              </button>
+            </div>
           </section>
         </div>
       </div>

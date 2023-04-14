@@ -2,6 +2,37 @@
   flex: 1;
 }
 
+.mainnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.mainnav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.mainnav a.router-link-exact-active {
+  color: #42b983;
+}
+
+.mainnavitem {
+  text-decoration: none;
+  margin-right: 0.5rem;
+  margin-left: 0.3rem;
+}
+
+.mainnavitem:hover {
+  text-decoration: underline;
+}
+
+.signinicon {
+  font-size: 1rem;
+  margin-right: 0.3rem;
+}
+
 .sronly {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */

@@ -1,18 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ButtonSignIn from '../components/ButtonSignIn';
-import styles from '../styles/Home.module.css';
 import iconchat from '../assets/img/icon-chat.png';
 import iconmoney from '../assets/img/icon-money.png';
 import iconsecurity from '../assets/img/icon-security.png';
+import styles from '../styles/Home.module.css';
 
 const Home = () => {
   return (
     <>
       <header>
         <Header />
-        <ButtonSignIn />
+        <nav className={styles.mainnav}>
+          <Link to="/connexion">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faCircleUser} />
+              </i>
+              Sign In
+            </a>
+          </Link>
+        </nav>
       </header>
       <main>
         <div className={styles.hero}>
