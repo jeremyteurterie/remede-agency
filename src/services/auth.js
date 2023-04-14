@@ -17,14 +17,6 @@ const Auth = {
     localStorage.removeItem('user');
   },
 
-  AuthService.login('exemple@email.com', 'motdepasse')
-  .then((user) => {
-    console.log('Utilisateur enregistré avec succès', user);
-  })
-  .catch((error) => {
-    console.log('Erreur lors de l\'enregistrement de l\'utilisateur', error);
-  });
-
   getCurrentUser: () => {
     if (localStorage.hasOwnProperty('user')) {
       const user = JSON.parse(localStorage.getItem('user'));
