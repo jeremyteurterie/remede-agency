@@ -8,7 +8,7 @@ const ButtonSignIn = () => {
   return (
     <>
       <nav className={styles.mainnav}>
-        <Link to="/signin">
+        <Link to="/connexion">
           <a className={styles.mainnavitem}>
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faCircleUser} />

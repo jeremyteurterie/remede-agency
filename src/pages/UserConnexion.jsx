@@ -8,7 +8,7 @@ import ButtonSignIn from '../components/ButtonSignIn';
 import Auth from '../services/auth';
 import styles from '../styles/SignIn.module.css';
 
-const SignIn = () => {
+const UserConnexion = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,7 +18,7 @@ const SignIn = () => {
     event.preventDefault();
     Auth.login(email, password)
       .then(() => {
-        navigate('/user');
+        navigate('/profil');
       })
       .catch((error) => {
         setError(error.response.data.message);
@@ -76,4 +76,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default UserConnexion;

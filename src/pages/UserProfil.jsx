@@ -9,7 +9,7 @@ import AccountSavings from '../components/AccountSavings';
 import AccountCreditCard from '../components/AccountCreditCard';
 import styles from '../styles/User.module.css';
 
-const User = () => {
+const UserProfil = () => {
   return (
     <>
       <header>
@@ -41,4 +41,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserProfil;

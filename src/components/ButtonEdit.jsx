@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/ButtonEdit.module.css';
 
+// renommer en UserInfo
 const ButtonEdit = () => {
   return (
     <div className={styles.header}>

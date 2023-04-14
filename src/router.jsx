@@ -5,8 +5,8 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import Home from './pages/Home';
-import SignIn from './pages/SignIn';
-import User from './pages/User';
+import UserConnexion from './pages/UserConnexion';
+import UserProfil from './pages/UserProfil';
 import Error404 from './pages/Error404';
 
 const router = createBrowserRouter(
@@ -14,13 +14,13 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<Home />} errorElement={<Error404 />}></Route>
       <Route
-        path="/signin"
-        element={<SignIn />}
+        path="/connexion"
+        element={<UserConnexion />}
         errorElement={<Error404 />}
       ></Route>
       <Route
-        path="/user"
-        element={<User />}
+        path="/profil"
+        element={<UserProfil />}
         errorElement={<Error404 />}
       ></Route>
       <Route path="*" element={<Error404 />}></Route>
