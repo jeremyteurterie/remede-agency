@@ -18,21 +18,17 @@ const UserProfil = () => {
       <header>
         <Header />
         <nav className={styles.mainnav}>
-          <Link to="/user">
-            <a className={styles.mainnavitem}>
-              <i className={styles.signinicon}>
-                <FontAwesomeIcon icon={faCircleUser} />
-              </i>
-              Tony
-            </a>
+          <Link className={styles.mainnavitem} to="/user">
+            <i className={styles.signinicon}>
+              <FontAwesomeIcon icon={faCircleUser} />
+            </i>
+            Tony
           </Link>
-          <Link to="/">
-            <a className={styles.mainnavitem}>
-              <i className={styles.signinicon}>
-                <FontAwesomeIcon icon={faRightFromBracket} />
-              </i>
-              Sign Out
-            </a>
+          <Link className={styles.mainnavitem} to="/">
+            <i className={styles.signinicon}>
+              <FontAwesomeIcon icon={faRightFromBracket} />
+            </i>
+            Sign Out
           </Link>
         </nav>
       </header>

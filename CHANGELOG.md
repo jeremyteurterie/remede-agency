@@ -8,8 +8,6 @@ All notable changes to this project will be documented in this file.
  Added
 
  - Dependencies (Redux 4.2.1, Redux Toolkit 1.9.3, Redux Devtools 3.2.5, React Redux 8.0.5, Axios 1.3.5).
- - Axios module to make HTTP calls to an API.
- - AuthService module for handling user authentication and registration.
  - Refactor pages.
 
  Deleted
