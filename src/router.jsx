@@ -13,18 +13,18 @@ import Error404 from './pages/Error404';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Home />} errorElement={<Error404 />}></Route>
+      <Route path="/" element={<Home />} errorElement={<Error404 />} />
       <Route
         path="/connexion"
         element={<UserConnexion />}
         errorElement={<Error404 />}
-      ></Route>
+      />
       <Route
         path="/profil"
         element={<UserProfil />}
         errorElement={<Error404 />}
-      ></Route>
-      <Route path="*" element={<Error404 />}></Route>
+      />
+      <Route path="*" element={<Error404 />} />
     </>
   )
 );

@@ -18,13 +18,11 @@ const Home = () => {
       <header>
         <Header />
         <nav className={styles.mainnav}>
-          <Link to="/connexion">
-            <a className={styles.mainnavitem}>
-              <i className={styles.signinicon}>
-                <FontAwesomeIcon icon={faCircleUser} />
-              </i>
-              Sign In
-            </a>
+          <Link to="/connexion" className={styles.mainnavitem}>
+            <i className={styles.signinicon}>
+              <FontAwesomeIcon icon={faCircleUser} />
+            </i>
+            Sign In
           </Link>
         </nav>
       </header>
