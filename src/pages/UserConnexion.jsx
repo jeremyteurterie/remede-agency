@@ -1,33 +1,29 @@
 import React from 'react';
 // modules
 import { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 // components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-// services
-
+// slices
+import { loginUser } from '../slices/auth.slice';
 // styles
 import styles from '../styles/UserConnexion.module.css';
 
 const UserConnexion = () => {
-  // const dispatch = useDispatch();
-  // const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const isLoading = useSelector((state) => state.auth.isLoading);
+  const error = useSelector((state) => state.auth.error);
 
-  // console.log(auth);
-
-  // const [user, setUser] = useState({
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(registerIser(user));
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(email, password));
+  };
 
   return (
     <>
@@ -49,13 +45,13 @@ const UserConnexion = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
             <h1>Sign In</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className={styles.inputwrapper}>
                 <label htmlFor="username">Username</label>
                 <input
                   type="text"
                   id="username"
-                  // onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className={styles.inputwrapper}>
@@ -63,18 +59,20 @@ const UserConnexion = () => {
                 <input
                   type="password"
                   id="password"
-                  // onChange={(e) =>
-                  //   setUser({ ...user, password: e.target.value })
-                  // }
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className={styles.inputremember}>
                 <input type="checkbox" id="remember-me" />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
-              <Link to="/profil">
-                <button className={styles.signinbutton}>Sign In</button>
-              </Link>
+              <button
+                className={styles.signinbutton}
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Loading...' : 'Sign In'}
+              </button>
             </form>
           </section>
         </main>

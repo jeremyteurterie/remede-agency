@@ -1,10 +1,22 @@
-export const url = 'http://localhost:3001/api';
+import axios from 'axios';
 
-// import axios from 'axios';
+const API_URL = 'http://localhost:3001/api';
 
-// const API_BASE_URL = 'http://localhost:3001';
-// const API = axios.create({
-//   baseURL: API_BASE_URL,
-// });
+const Login = async (email, password) => {
+  try {
+    console.log('email: ', email);
+    console.log('password: ', password);
+    const response = await axios.post(`${API_URL}/v1/user/login`, {
+      email,
+      password,
+    });
+    console.log('response: ', response);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    console.log('error message: ', error.message);
+    console.log('error response data: ', error.response.data);
+  }
+};
 
-// export default API;
+export default Login;
