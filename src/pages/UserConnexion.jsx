@@ -9,7 +9,7 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 // slices
-import { loginUser } from '../slices/auth.slice';
+import { loginUser } from '../slices/Auth.Slice';
 // styles
 import styles from '../styles/UserConnexion.module.css';
 

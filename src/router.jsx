@@ -10,27 +10,27 @@ import UserConnexion from './pages/UserConnexion';
 import UserProfil from './pages/UserProfil';
 import Error404 from './pages/Error404';
 
-const router = createBrowserRouter(
+const Routes = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Home />} errorElement={<Error404 />} />
+      <Route path="/" element={<Home />} errorElement={<Error404 />}></Route>
       <Route
         path="/connexion"
         element={<UserConnexion />}
         errorElement={<Error404 />}
-      />
+      ></Route>
       <Route
         path="/profil"
         element={<UserProfil />}
         errorElement={<Error404 />}
-      />
-      <Route path="*" element={<Error404 />} />
+      ></Route>
+      <Route path="*" element={<Error404 />}></Route>
     </>
   )
 );
 
 function Router() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={Routes} />;
 }
 
 export default Router;
