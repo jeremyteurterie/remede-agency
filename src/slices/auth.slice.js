@@ -1,53 +1,55 @@
-import { createSlice } from '@reduxjs/toolkit';
-import Login from '../services/api';
+// import { createSlice } from '@reduxjs/toolkit';
+// import Login from '../services/Api';
 
-const initialState = {
-  user: null,
-  isAuthenticated: false,
-  isLoading: false,
-  error: null,
-};
+// const initialState = {
+//   user: null,
+//   isAuthenticated: false,
+//   isLoading: false,
+//   error: null,
+// };
 
-const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {
-    loginStart: (state) => {
-      state.isLoading = true;
-      console.log('loginStart: ', state);
-    },
-    loginSuccess: (state, action) => {
-      state.user = action.payload.user;
-      state.isAuthenticated = true;
-      state.isLoading = false;
-      state.error = null;
-      console.log('loginSuccess: ', state);
-    },
-    loginFail: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-      console.log('loginFail: ', state);
-    },
-  },
-});
+// const authSlice = createSlice({
+//   name: 'auth',
+//   initialState,
+//   reducers: {
+//     loginStart: (state) => {
+//       state.isLoading = true;
+//       console.log('loginStart: ', state);
+//     },
+//     loginSuccess: (state, action) => {
+//       state.user = action.payload.user;
+//       state.isAuthenticated = true;
+//       state.isLoading = false;
+//       state.error = null;
+//       console.log('loginSuccess: ', state);
+//     },
+//     loginFail: (state, action) => {
+//       state.isLoading = false;
+//       state.error = action.payload;
+//       console.log('loginFail: ', state);
+//     },
+//   },
+// });
 
-export const { loginStart, loginSuccess, loginFail } = authSlice.actions;
+// export const { loginStart, loginSuccess, loginFail } = authSlice.actions;
 
-export const loginUser = (email, password) => async (dispatch) => {
-  console.log('email: ', email);
-  console.log('password: ', password);
-  dispatch(loginStart());
-  try {
-    const response = await Login(email, password);
-    console.log('response: ', response);
-    dispatch(loginSuccess(response));
-  } catch (error) {
-    console.log('error: ', error);
-    dispatch(loginFail(error.message));
-  }
-};
+// export const loginUser = (email, password) => async (dispatch) => {
+//   console.log('email: ', email);
+//   console.log('password: ', password);
+//   dispatch(loginStart());
+//   try {
+//     const response = await Login(email, password);
+//     console.log('response: ', response);
+//     dispatch(loginSuccess(response));
+//   } catch (error) {
+//     console.log('error: ', error);
+//     dispatch(loginFail(error.message));
+//   }
+// };
 
-export default authSlice.reducer;
+// export default authSlice.reducer;
+
+/////////////////////////////////////////
 
 // export const login = createAsyncThunk(
 //   'v1/user/login',

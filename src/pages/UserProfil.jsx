@@ -9,8 +9,6 @@ import {
 // components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-// services
-
 // styles
 import styles from '../styles/UserProfil.module.css';
 
