@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 // modules
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+// redux
+import { useDispatch } from 'react-redux';
 // components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-// // slices
-// import { loginUser } from '../slices/Auth.Slice';
+// slices
+import { loginUser } from '../slices/auth.slice';
 // styles
 import styles from '../styles/UserConnexion.module.css';
 
 const UserConnexion = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(email, password));
+  };
+
   return (
     <>
       <header>
@@ -32,14 +44,22 @@ const UserConnexion = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
             <h1>Sign In</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className={styles.inputwrapper}>
                 <label htmlFor="username">Username</label>
-                <input type="text" id="username" />
+                <input
+                  type="text"
+                  id="username"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className={styles.inputwrapper}>
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" />
+                <input
+                  type="password"
+                  id="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <div className={styles.inputremember}>
                 <input type="checkbox" id="remember-me" />

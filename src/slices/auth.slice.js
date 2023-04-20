@@ -1,3 +1,45 @@
+import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import API_URL from '../services/api';
+
+const AuthSlice = createSlice({
+  name: 'auth',
+  initialState: {
+    user: null,
+    error: null,
+    loading: false,
+  },
+  reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+  },
+});
+
+export const { setUser, setError, setLoading } = AuthSlice.actions;
+
+export const loginUser = (email, password) => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const response = await axios.post(`${API_URL}/login`, {
+      email,
+      password,
+    });
+    dispatch(setUser(response.data));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+  dispatch(setLoading(false));
+};
+
+export default AuthSlice.reducer;
+
 // import { createSlice } from '@reduxjs/toolkit';
 // import Login from '../services/Api';
 
