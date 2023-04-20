@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 // modules
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-// redux
-import { useDispatch } from 'react-redux';
 // components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-// slices
-import { loginUser } from '../slices/auth.slice';
+// services
+import Auth from '../slices/auth.slice';
 // styles
 import styles from '../styles/UserConnexion.module.css';
 
 const UserConnexion = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(loginUser(email, password));
+  const handleLogin = (event) => {
+    event.preventDefault();
+    Auth.login(email, password)
+      .then(() => {
+        navigate('/profil');
+      })
+      .catch((error) => {
+        setError(error.response.data.message);
+      });
   };
 
   return (
@@ -29,11 +34,13 @@ const UserConnexion = () => {
       <header>
         <Header />
         <nav className={styles.mainnav}>
-          <Link className={styles.mainnavitem} to="/connexion">
-            <i className={styles.signinicon}>
-              <FontAwesomeIcon icon={faCircleUser} />
-            </i>
-            Sign In
+          <Link to="/connexion">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faCircleUser} />
+              </i>
+              Sign In
+            </a>
           </Link>
         </nav>
       </header>
@@ -44,13 +51,14 @@ const UserConnexion = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
             <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleLogin}>
               <div className={styles.inputwrapper}>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="text"
-                  id="username"
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
               <div className={styles.inputwrapper}>
@@ -58,18 +66,18 @@ const UserConnexion = () => {
                 <input
                   type="password"
                   id="password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </div>
               <div className={styles.inputremember}>
                 <input type="checkbox" id="remember-me" />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
-              <Link to="/profil">
-                <button className={styles.signinbutton} type="submit">
-                  Sign In
-                </button>
-              </Link>
+              {error && <div className={styles.error}>{error}</div>}
+              <button type="submit" className={styles.signinbutton}>
+                Sign In
+              </button>
             </form>
           </section>
         </main>

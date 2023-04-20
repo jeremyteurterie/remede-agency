@@ -9,25 +9,40 @@ import {
 // components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+// services
+import Auth from '../slices/auth.slice';
 // styles
 import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const currentUser = Auth.getCurrentUser();
+    setUser(currentUser);
+  }, []);
+
+  console.log(user);
+
   return (
     <>
       <header>
         <Header />
         <nav className={styles.mainnav}>
-          <Link to="/user" className={styles.mainnavitem}>
-            <i className={styles.signinicon}>
-              <FontAwesomeIcon icon={faCircleUser} />
-            </i>
+          <Link to="/user">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faCircleUser} />
+              </i>
+            </a>
           </Link>
-          <Link to="/" className={styles.mainnavitem}>
-            <i className={styles.signinicon}>
-              <FontAwesomeIcon icon={faRightFromBracket} />
-            </i>
-            Sign Out
+          <Link to="/">
+            <a className={styles.mainnavitem}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </i>
+              Sign Out
+            </a>
           </Link>
         </nav>
       </header>

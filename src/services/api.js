@@ -1,3 +1,8 @@
-const API_URL = 'http://localhost:3001/api/v1/user';
+import axios from 'axios';
 
-export default API_URL;
+const API_BASE_URL = 'http://localhost:3001';
+const API = axios.create({
+  baseURL: API_BASE_URL,
+});
+
+export default API;
