@@ -1,44 +1,79 @@
-import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import API_URL from '../services/api';
+// import axios from 'axios';
+// import { createAsyncThunk } from '@reduxjs/toolkit';
+// import { API_URL } from '../services/api';
 
-const AuthSlice = createSlice({
-  name: 'auth',
-  initialState: {
-    user: null,
-    error: null,
-    loading: false,
-  },
-  reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
-    },
-    setError: (state, action) => {
-      state.error = action.payload;
-    },
-    setLoading: (state, action) => {
-      state.loading = action.payload;
-    },
-  },
-});
+// export const LoginService = createAsyncThunk(
+//   'user/login',
+//   async ({ username, password, remember }, { rejectWithValue }) => {
+//     try {
+//       const axiosRequest = axios.create({
+//         baseURL: API_URL,
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//       });
 
-export const { setUser, setError, setLoading } = AuthSlice.actions;
+//       const datas = await axiosRequest.post('/user/login', {
+//         email: username,
+//         password: password,
+//       });
 
-export const loginUser = (email, password) => async (dispatch) => {
-  dispatch(setLoading(true));
-  try {
-    const response = await axios.post(`${API_URL}/login`, {
-      email,
-      password,
-    });
-    dispatch(setUser(response.data));
-  } catch (error) {
-    dispatch(setError(error.message));
-  }
-  dispatch(setLoading(false));
-};
+//       if (remember === true) {
+//         localStorage.setItem('userToken', datas.data.body.token);
+//       } else {
+//         localStorage.clear();
+//       }
 
-export default AuthSlice.reducer;
+//       return datas.data;
+//     } catch (error) {
+//       console.log(
+//         error.response.data.status + ' ' + error.response.data.message
+//       );
+
+//       if (error.response && error.response.data.message) {
+//         return rejectWithValue(error.response.data.message);
+//       } else {
+//         return rejectWithValue(error.message);
+//       }
+//     }
+//   }
+// );
+
+// export const LogoutService = () => {
+//   localStorage.removeItem('userToken');
+// };
+
+// import { createSlice } from '@reduxjs/toolkit';
+
+// const initialState = {
+//   isLoggedIn: false,
+//   currentUser: null,
+//   errorMessage: '',
+// };
+
+// export const authSlice = createSlice({
+//   name: 'auth',
+//   initialState,
+//   reducers: {
+//     login: (state, action) => {
+//       state.isLoggedIn = true;
+//       state.currentUser = action.payload;
+//       state.errorMessage = '';
+//     },
+//     logout: (state) => {
+//       state.isLoggedIn = false;
+//       state.currentUser = null;
+//       state.errorMessage = '';
+//     },
+//     setError: (state, action) => {
+//       state.errorMessage = action.payload;
+//     },
+//   },
+// });
+
+// export const { login, logout, setError } = authSlice.actions;
+
+// export default authSlice.reducer;
 
 // import { createSlice } from '@reduxjs/toolkit';
 // import Login from '../services/Api';

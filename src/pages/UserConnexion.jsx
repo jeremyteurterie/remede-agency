@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 // modules
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
@@ -31,20 +30,33 @@ const UserConnexion = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
             <h1>Sign In</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className={styles.inputwrapper}>
-                <label htmlFor="email">Email</label>
-                <input type="text" id="email" />
+                <label htmlFor="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className={styles.inputwrapper}>
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" />
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <div className={styles.inputremember}>
                 <input type="checkbox" id="remember-me" />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
-              <button type="submit" className={styles.signinbutton}>
+              <button
+                className={styles.signinbutton}
+                onClick={(e) => handleSubmit(e)}
+              >
                 Sign In
               </button>
             </form>
