@@ -23,7 +23,13 @@ const UserProfil = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
           </Link>
-          <Link className={styles.mainnavitem} to="/">
+          <Link
+            onClick={() => {
+              dispatch(logoutUser(null));
+            }}
+            className={styles.mainnavitem}
+            to="/"
+          >
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faRightFromBracket} />
             </i>

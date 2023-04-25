@@ -18,7 +18,7 @@ const Home = () => {
       <header>
         <Header />
         <nav className={styles.mainnav}>
-          <Link to="/connexion" className={styles.mainnavitem}>
+          <Link to="/login" className={styles.mainnavitem}>
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faCircleUser} />
             </i>

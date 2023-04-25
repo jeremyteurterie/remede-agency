@@ -5,14 +5,14 @@ import Rooter from './router';
 // module redux
 import { Provider } from 'react-redux';
 // store redux
-// import Store from './store';
+import store from './store';
 // styles
 import './styles/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* <Provider store={Store}> */}
-    <Rooter />
-    {/* </Provider> */}
+    <Provider store={store}>
+      <Rooter />
+    </Provider>
   </React.StrictMode>
 );

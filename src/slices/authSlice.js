@@ -1,10 +1,203 @@
-// import axios from 'axios';
-// import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { API_URL } from '../services/api';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import authService from '../services/api';
+
+// get user from localStorage
+const user = JSON.parse(localStorage.getItem('user'));
+
+const initialState = {
+  user: user ? user : null,
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: '',
+};
+
+// login user
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+  try {
+    return await authService.login(user);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = '';
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      });
+  },
+});
+
+export const { reset } = authSlice.actions;
+export default authSlice.reducer;
+
+// export function login(data) {
+//   return axios.post(`${API_URL}/login`, data);
+// }
+
+// export function getCurrentUser() {
+//   try {
+//     const token = localStorage.getItem('token');
+//     return jwtDecode(token);
+//   } catch (error) {
+//     return null;
+//   }
+// }
+
+// export function logout() {
+//   localStorage.removeItem('token');
+// }
+
+// const initialState = {
+//   token: localStorage.getItem('token'),
+//   email: '',
+//   password: '',
+//   firstName: '',
+//   lastName: '',
+//   loginStatus: '',
+//   loginError: '',
+//   userLoaded: false,
+// };
+
+// export const loginUser = createAsyncThunk(
+//   'auth/loginUser',
+//   async (user, { rejectedWithValue }) => {
+//     try {
+//       const token = await axios.post(`${API_URL}/login`, {
+//         email: user.email,
+//         password: user.password,
+//       });
+//       localStorage.setItem('token', token.data);
+//       return token.data;
+//     } catch (error) {
+//       console.log(error.response.data);
+//       return rejectedWithValue(error.response.data);
+//     }
+//   }
+// );
+
+// const authSlice = createSlice({
+//   name: 'auth',
+//   initialState,
+//   reducers: {
+//     loadUser(state, action) {
+//       const token = state.token;
+//       console.log(token);
+//       if (token) {
+//         try {
+//           const user = jwtDecode(token);
+//           return {
+//             ...state,
+//             token,
+//             email: user.email,
+//             password: user.password,
+//             firstName: user.firstName,
+//             lastName: user.lastName,
+//             userLoaded: true,
+//           };
+//         } catch (error) {
+//           console.log(error);
+//         }
+//       }
+//     },
+//     logoutUser(state, action) {
+//       localStorage.removeItem('token');
+//       return {
+//         ...state,
+//         token: '',
+//         email: '',
+//         password: '',
+//         firstName: '',
+//         lastName: '',
+//         loginStatus: '',
+//         loginError: '',
+//         userLoaded: false,
+//       };
+//     },
+//   },
+//   extraReducers: (builder) => {
+//     builder.addCase(loginUser.pending, (state, action) => {
+//       return { ...state, loginStatus: 'pending' };
+//     });
+//     builder.addCase(loginUser.fulfilled, (state, action) => {
+//       if (action.payload) {
+//         const user = jwtDecode(action.payload);
+//         return {
+//           ...state,
+//           token: action.payload,
+//           email: user.email,
+//           password: user.password,
+//           firstName: user.firstName,
+//           lastName: user.lastName,
+//           loginStatus: 'success',
+//         };
+//       } else return state;
+//     });
+//     builder.addCase(loginUser.rejected, (state, action) => {
+//       return {
+//         ...state,
+//         loginStatus: 'rejected',
+//         loginError: action.payload,
+//       };
+//     });
+//   },
+// });
+
+// export const { loadUser, logoutUser } = authSlice.actions;
+// export default authSlice.reducer;
+
+// const Login = (email, password) => {
+//   // set configurations
+//   const configuration = {
+//     method: 'post',
+//     url: `${API_URL}/login`,
+//     data: {
+//       email,
+//       password,
+//     },
+//   };
+//   // make the API call
+//   axios(configuration)
+//     .then((result) => {
+//       console.log(result);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+
+// export default Login;
 
 // export const LoginService = createAsyncThunk(
 //   'user/login',
-//   async ({ username, password, remember }, { rejectWithValue }) => {
+//   async ({ email, password, remember }, { rejectWithValue }) => {
 //     try {
 //       const axiosRequest = axios.create({
 //         baseURL: API_URL,
@@ -14,7 +207,7 @@
 //       });
 
 //       const datas = await axiosRequest.post('/user/login', {
-//         email: username,
+//         email: email,
 //         password: password,
 //       });
 
@@ -38,6 +231,15 @@
 //     }
 //   }
 // );
+
+// export const Login = async () => {
+//   try {
+//     const response = await axios.post(`${API_URL}/login`, data);
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 // export const LogoutService = () => {
 //   localStorage.removeItem('userToken');
@@ -128,17 +330,6 @@
 
 /////////////////////////////////////////
 
-// export const login = createAsyncThunk(
-//   'v1/user/login',
-//   async ({ email, password }) => {
-//     const response = await axios.post(`${DATABASE_URL}/v1/user/login`, {
-//       email,
-//       password,
-//     });
-//     return response.data;
-//   }
-// );
-
 // const authSlice = createSlice({
 //   name: 'auth',
 //   initialState: {
@@ -177,7 +368,7 @@
 //   token: localStorage.getItem('token'),
 //   email: '',
 //   password: '',
-//   registerStatus: '',
+//   loginStatus: '',
 //   registerError: '',
 //   loginStatus: '',
 //   loginError: '',

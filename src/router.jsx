@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 // pages
 import Home from './pages/Home';
-import UserConnexion from './pages/UserConnexion';
+import UserLogin from './pages/UserLogin';
 import UserProfil from './pages/UserProfil';
 import Error404 from './pages/Error404';
 
@@ -15,8 +15,8 @@ const Routes = createBrowserRouter(
     <>
       <Route path="/" element={<Home />} errorElement={<Error404 />}></Route>
       <Route
-        path="/connexion"
-        element={<UserConnexion />}
+        path="/login"
+        element={<UserLogin />}
         errorElement={<Error404 />}
       ></Route>
       <Route
