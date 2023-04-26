@@ -21,7 +21,7 @@ const UserProfil = () => {
 
   const onLogout = () => {
     dispatch(logout());
-    dispatch(logout());
+    dispatch(reset());
     navigate('/');
   };
 
@@ -35,17 +35,7 @@ const UserProfil = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
           </Link>
-          {/* {user ? (
-            <button onClick={onLogout}>
-              <i className={styles.signinicon}>
-                <FontAwesomeIcon icon={faRightFromBracket} />
-              </i>
-              Sign Out
-            </button>
-          ) : (
-            <></>
-          )} */}
-          <button onClick={onLogout}>
+          <button className={styles.mainnavitembutton} onClick={onLogout}>
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faRightFromBracket} />
             </i>
