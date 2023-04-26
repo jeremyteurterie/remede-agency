@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 // modules
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout, reset } from '../slices/authSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleUser,
@@ -13,6 +15,16 @@ import Footer from '../components/Footer';
 import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(logout());
+    navigate('/');
+  };
+
   return (
     <>
       <header>
@@ -23,18 +35,22 @@ const UserProfil = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
           </Link>
-          <Link
-            onClick={() => {
-              dispatch(logoutUser(null));
-            }}
-            className={styles.mainnavitem}
-            to="/"
-          >
+          {/* {user ? (
+            <button onClick={onLogout}>
+              <i className={styles.signinicon}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </i>
+              Sign Out
+            </button>
+          ) : (
+            <></>
+          )} */}
+          <button onClick={onLogout}>
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faRightFromBracket} />
             </i>
             Sign Out
-          </Link>
+          </button>
         </nav>
       </header>
       <div className={styles.main}>
