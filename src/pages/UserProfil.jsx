@@ -41,6 +41,7 @@ const UserProfil = () => {
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
+            Tony
           </Link>
           <button className={styles.mainnavitembutton} onClick={onLogout}>
             <i className={styles.signinicon}>
@@ -56,6 +57,7 @@ const UserProfil = () => {
             <h1>
               Welcome back
               <br />
+              Tony Stark!
             </h1>
             <button className={styles.editbutton} onClick={handleUpdateProfile}>
               Edit Name
