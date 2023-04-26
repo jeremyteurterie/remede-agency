@@ -30,7 +30,7 @@ const UserLogin = () => {
       toast.error(message);
     }
     if (isSuccess || user) {
-      // navigate('/profil');
+      navigate('/profil');
     }
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
@@ -51,38 +51,12 @@ const UserLogin = () => {
     dispatch(login(userData));
   };
 
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [errorMessage, setErrorMessage] = useState('');
-  // const navigate = useNavigate('');
-
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post(`${API_URL}/user/login`, {
-  //       email,
-  //       password,
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       navigate('/profil');
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       if (error.response && error.response.status === 400) {
-  //         setErrorMessage('Invalid email or password');
-  //       } else {
-  //         setErrorMessage('An error occurred. Please try again later.');
-  //       }
-  //     });
-  // };
-
   return (
     <>
       <header>
         <Header />
         <nav className={styles.mainnav}>
-          <Link className={styles.mainnavitem} to="/connexion">
+          <Link className={styles.mainnavitem} to="/login">
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
