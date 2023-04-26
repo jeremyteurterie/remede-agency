@@ -17,7 +17,6 @@ import styles from '../styles/UserProfil.module.css';
 const UserProfil = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
     dispatch(logout());

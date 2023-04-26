@@ -14,6 +14,7 @@ import Footer from '../components/Footer';
 import styles from '../styles/UserLogin.module.css';
 
 const UserLogin = () => {
+  const [errorField, setErrorField] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,6 +22,7 @@ const UserLogin = () => {
   const { email, password } = formData;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
@@ -44,6 +46,10 @@ const UserLogin = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      setErrorField('Invalid email or password');
+      return;
+    }
     const userData = {
       email,
       password,
@@ -98,6 +104,7 @@ const UserLogin = () => {
                 <input type="checkbox" id="remember-me" />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
+              {errorField && <p>{errorField}</p>}
               <button className={styles.signinbutton} type="submit">
                 Sign In
               </button>
