@@ -15,8 +15,16 @@ import Footer from '../components/Footer';
 import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleUpdateProfile = async (e) => {
+    e.preventDefault();
+    const userData = { firstName, lastName };
+    await updateUserProfile(userData);
+  };
 
   const onLogout = () => {
     dispatch(logout());
@@ -49,7 +57,9 @@ const UserProfil = () => {
               Welcome back
               <br />
             </h1>
-            <button className={styles.editbutton}>Edit Name</button>
+            <button className={styles.editbutton} onClick={handleUpdateProfile}>
+              Edit Name
+            </button>
           </div>
           <h2 className={styles.sronly}>Accounts</h2>
           <section className={styles.account}>
