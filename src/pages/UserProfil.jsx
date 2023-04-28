@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // modules
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../slices/authSlice';
+import { setFirstName, setLastName, logout, reset } from '../slices/authSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleUser,
@@ -15,22 +15,32 @@ import Footer from '../components/Footer';
 import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleUpdateProfile = async (e) => {
-    e.preventDefault();
-    const userData = { firstName, lastName };
-    await updateUserProfile(userData);
-  };
+  const { firstName, lastName } = useSelector((state) => state.auth);
+
+  console.log(firstName);
 
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
     navigate('/');
   };
+
+  // let firstName = JSON.parse(localStorage.getItem('firstName'));
+  // let lastName = JSON.parse(localStorage.getItem('lastName'));
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+
+  // const handleUpdateProfile = async (e) => {
+  //   e.preventDefault();
+  //   const userData = {
+  //     firstName,
+  //     lastName,
+  //   };
+  //   dispatch(profil(userData));
+  // };
 
   return (
     <>
@@ -57,11 +67,10 @@ const UserProfil = () => {
             <h1>
               Welcome back
               <br />
-              Tony Stark!
+              {firstName + ' '}
+              {lastName + '!'}
             </h1>
-            <button className={styles.editbutton} onClick={handleUpdateProfile}>
-              Edit Name
-            </button>
+            <button className={styles.editbutton}>Edit Name</button>
           </div>
           <h2 className={styles.sronly}>Accounts</h2>
           <section className={styles.account}>

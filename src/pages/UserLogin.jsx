@@ -23,7 +23,7 @@ const UserLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { token, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
 
@@ -31,11 +31,11 @@ const UserLogin = () => {
     if (isError) {
       toast.error(message);
     }
-    if (isSuccess || user) {
+    if (isSuccess || token) {
       navigate('/profil');
     }
     dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [token, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({

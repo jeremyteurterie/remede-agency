@@ -2,10 +2,12 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from '../services/api';
 
 // get user from localStorage
-const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
 
 const initialState = {
-  user: user ? user : null,
+  token: token ? token : null,
+  firstName: null,
+  lastName: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -13,9 +15,9 @@ const initialState = {
 };
 
 // login user
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (token, thunkAPI) => {
   try {
-    return await authService.login(user);
+    return await authService.login(token);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -25,6 +27,27 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   }
 });
 
+// // update profil
+// export const profil = createAsyncThunk(
+//   'auth/profil',
+//   async (userData, thunkAPI) => {
+//     try {
+//       await authService.updateProfile(userData);
+//       const updatedUser = await authService.getUser(); // Ajouter cette ligne pour récupérer les nouvelles informations de l'utilisateur
+//       return updatedUser;
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       return thunkAPI.rejectWithValue(message);
+//     }
+//   }
+// );
+
+// logout
 export const logout = createAsyncThunk('auth/logout', () => {
   authService.logout();
 });
@@ -39,6 +62,12 @@ export const authSlice = createSlice({
       state.isError = false;
       state.message = '';
     },
+    setFirstName: (state, action) => {
+      state.firstName = action.payload;
+    },
+    setLastName: (state, action) => {
+      state.lastName = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -48,19 +77,27 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.token = action.payload;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
+        state.token = null;
+        state.firstName = null;
+        state.lastName = null;
       })
       .addCase(logout.fulfilled, (state) => {
-        state.user = null;
+        state.token = null;
+      })
+      .addCase(profil.fulfilled, (state, action) => {
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
       });
   },
 });
 
-export const { reset } = authSlice.actions;
+export const { reset, setFirstName, setLastName } = authSlice.actions;
 export default authSlice.reducer;
