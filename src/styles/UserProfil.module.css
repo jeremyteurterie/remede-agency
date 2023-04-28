@@ -107,12 +107,31 @@
   margin-bottom: 2rem;
 }
 
+.editname {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editname div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.editname div div {
+  flex-direction: column;
+}
+
+.editname input {
+  height: 30px;
+}
+
 .editbutton {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
   font-weight: bold;
-  padding: 10px;
+  padding: 9px;
 }
 
 .transactionbutton {

@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 // modules
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFirstName, setLastName, logout, reset } from '../slices/authSlice';
+import {
+  userProfil,
+  setDataStorage,
+  setFirstName,
+  setLastName,
+  logout,
+} from '../slices/authSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleUser,
@@ -15,18 +21,36 @@ import Footer from '../components/Footer';
 import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  let firstName = JSON.parse(localStorage.getItem('firstName'));
+  let lastName = JSON.parse(localStorage.getItem('lastName'));
+  let token = JSON.parse(localStorage.getItem('token'));
+  let inputFirstName = document.getElementById('firstName');
+  let inputLastName = document.getElementById('lastName');
 
-  const { firstName, lastName } = useSelector((state) => state.auth);
+  const [firstNames, setFirstNames] = useState('');
+  const [lastNames, setLastNames] = useState('');
+  const navigate = useNavigate();
 
-  console.log(firstName);
-
-  const onLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    navigate('/');
+  const handleEditName = async (e) => {
+    e.preventDefault();
+    const response = await userProfil(firstName, lastName, token);
+    if (response != null) {
+      dispatch(setDataStorage(response));
+      dispatch(setFirstName(firstName));
+      dispatch(setLastName(lastName));
+      navigate('/profil');
+      inputFirstName.value = '';
+      inputLastName.value = '';
+    } else {
+      alert('Error Unauthorized');
+    }
   };
+
+  function isLogout() {
+    dispatch(logout());
+    navigate('/');
+  }
 
   // let firstName = JSON.parse(localStorage.getItem('firstName'));
   // let lastName = JSON.parse(localStorage.getItem('lastName'));
@@ -51,9 +75,9 @@ const UserProfil = () => {
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
-            Tony
+            {firstName + ' '}
           </Link>
-          <button className={styles.mainnavitembutton} onClick={onLogout}>
+          <button className={styles.mainnavitembutton} onClick={isLogout}>
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faRightFromBracket} />
             </i>
@@ -70,7 +94,41 @@ const UserProfil = () => {
               {firstName + ' '}
               {lastName + '!'}
             </h1>
-            <button className={styles.editbutton}>Edit Name</button>
+            <form onSubmit={handleEditName}>
+              <div className={styles.editname}>
+                <div>
+                  <div>
+                    <label htmlFor="firstName"></label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      placeholder="First Name"
+                      pattern="[A-z]{2,}"
+                      onChange={(e) => {
+                        setFirstNames(e.target.value);
+                      }}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName"></label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      placeholder="Last Name"
+                      pattern="[A-z]{2,}"
+                      onChange={(e) => {
+                        setLastNames(e.target.value);
+                      }}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <button className={styles.editbutton}>Edit Name</button>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
           <h2 className={styles.sronly}>Accounts</h2>
           <section className={styles.account}>

@@ -1,103 +1,174 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import authService from '../services/api';
+import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 
-// get user from localStorage
-const token = JSON.parse(localStorage.getItem('token'));
+const API_URL = 'http://localhost:3001/api/v1';
 
-const initialState = {
-  token: token ? token : null,
-  firstName: null,
-  lastName: null,
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  message: '',
+let initialState = {
+  email: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+  data: {},
+  error: false,
+  connected: false,
 };
 
-// login user
-export const login = createAsyncThunk('auth/login', async (token, thunkAPI) => {
+export const userLogin = async (email, password, checkbox) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let responses = '';
+
   try {
-    return await authService.login(token);
+    const response = await axios.post(
+      API_URL + '/user/login',
+      {
+        email: email,
+        password: password,
+      },
+      config
+    );
+
+    if (response.status === 200) {
+      if (checkbox) {
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+      } else {
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+      }
+      responses = response.data.body.token;
+      localStorage.setItem('token', JSON.stringify(responses));
+
+      return getToken(responses);
+    } else {
+      responses = null;
+    }
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    return thunkAPI.rejectWithValue(message);
+    responses = null;
   }
-});
 
-// // update profil
-// export const profil = createAsyncThunk(
-//   'auth/profil',
-//   async (userData, thunkAPI) => {
-//     try {
-//       await authService.updateProfile(userData);
-//       const updatedUser = await authService.getUser(); // Ajouter cette ligne pour récupérer les nouvelles informations de l'utilisateur
-//       return updatedUser;
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString();
-//       return thunkAPI.rejectWithValue(message);
-//     }
-//   }
-// );
+  return responses;
+};
 
-// logout
-export const logout = createAsyncThunk('auth/logout', () => {
-  authService.logout();
-});
+export const getToken = async (token) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-export const authSlice = createSlice({
-  name: 'auth',
+  try {
+    const response = await axios.post(`${API_URL}/user/profile`, {}, config);
+    const data = response.data.body;
+    return data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const userProfil = async (firstName, lastName, token) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const { data, status } = await axios.put(
+      `${API_URL}/user/profile`,
+      { firstName, lastName },
+      config
+    );
+
+    if (status === 200) {
+      return data.body;
+    }
+    return null;
+  } catch (error) {
+    return null;
+  }
+};
+
+const authSlice = createSlice({
+  name: 'login',
   initialState,
   reducers: {
-    reset: (state) => {
-      state.isLoading = false;
-      state.isSuccess = false;
-      state.isError = false;
-      state.message = '';
+    setEmail(state, action) {
+      state.email = action.payload;
     },
-    setFirstName: (state, action) => {
-      state.firstName = action.payload;
+    setPassword(state, action) {
+      state.password = action.payload;
     },
-    setLastName: (state, action) => {
-      state.lastName = action.payload;
+    setDataStorage(state, action) {
+      localStorage.setItem('data', JSON.stringify(action.payload));
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(login.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.token = action.payload;
-        state.firstName = action.payload.firstName;
-        state.lastName = action.payload.lastName;
-      })
-      .addCase(login.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-        state.token = null;
-        state.firstName = null;
-        state.lastName = null;
-      })
-      .addCase(logout.fulfilled, (state) => {
-        state.token = null;
-      })
-      .addCase(profil.fulfilled, (state, action) => {
-        state.firstName = action.payload.firstName;
-        state.lastName = action.payload.lastName;
-      });
+    setDataState(state, action) {
+      return {
+        ...state,
+        data: JSON.parse(action.payload),
+      };
+    },
+    setFirstName(state, action) {
+      localStorage.setItem('firstName', JSON.stringify(action.payload));
+      return {
+        ...state,
+        firstName: action.payload,
+      };
+    },
+    setLastName(state, action) {
+      localStorage.setItem('lastName', JSON.stringify(action.payload));
+      return {
+        ...state,
+        lastName: action.payload,
+      };
+    },
+    setConnected(state, action) {
+      localStorage.setItem('isConnected', action.payload);
+      return {
+        ...state,
+        connected: localStorage.getItem('isConnected'),
+      };
+    },
+    setError(state, action) {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    },
+    removeError(state, action) {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    },
+    logout() {
+      localStorage.removeItem('isConnected');
+      localStorage.removeItem('data');
+      localStorage.removeItem('lastName');
+      localStorage.removeItem('firstName');
+      localStorage.removeItem('token');
+      return initialState;
+    },
   },
 });
 
-export const { reset, setFirstName, setLastName } = authSlice.actions;
+export const {
+  setEmail,
+  setPassword,
+  setDataStorage,
+  setDataState,
+  setFirstName,
+  setLastName,
+  setConnected,
+  setError,
+  removeError,
+  logout,
+} = authSlice.actions;
+
 export default authSlice.reducer;
