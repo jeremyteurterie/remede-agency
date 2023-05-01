@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// modules
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

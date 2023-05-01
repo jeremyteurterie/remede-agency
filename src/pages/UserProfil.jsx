@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-// modules
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   userProfil,
   setDataStorage,
@@ -35,10 +34,11 @@ const UserProfil = () => {
   const handleEditName = async (e) => {
     e.preventDefault();
     const response = await userProfil(firstName, lastName, token);
+    console.log(response);
     if (response != null) {
       dispatch(setDataStorage(response));
-      dispatch(setFirstName(firstName));
-      dispatch(setLastName(lastName));
+      dispatch(setFirstName(firstNames));
+      dispatch(setLastName(lastNames));
       navigate('/profil');
       inputFirstName.value = '';
       inputLastName.value = '';
@@ -51,20 +51,6 @@ const UserProfil = () => {
     dispatch(logout());
     navigate('/');
   }
-
-  // let firstName = JSON.parse(localStorage.getItem('firstName'));
-  // let lastName = JSON.parse(localStorage.getItem('lastName'));
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-
-  // const handleUpdateProfile = async (e) => {
-  //   e.preventDefault();
-  //   const userData = {
-  //     firstName,
-  //     lastName,
-  //   };
-  //   dispatch(profil(userData));
-  // };
 
   return (
     <>
