@@ -83,3 +83,8 @@
   padding: 5px;
   font-size: 1.2rem;
 }
+
+.error {
+  padding-top: 10px;
+  color: red;
+}

@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 // styles
 import styles from '../styles/Error404.module.css';
 
+/**
+ * Component for displaying a custom 404 error page.
+ * @returns {JSX.Element} - React element representing the Error404 component.
+ */
 const Error404 = () => {
   return (
     <div className={styles.errorpage}>

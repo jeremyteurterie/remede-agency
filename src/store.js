@@ -6,3 +6,12 @@ export default configureStore({
     login: authReducer,
   },
 });
+
+// import { configureStore } from '@reduxjs/toolkit';
+// import { loginValue } from './slices/authSlice';
+
+// export default configureStore({
+//   reducer: {
+//     login: loginValue.reducer,
+//   },
+// });

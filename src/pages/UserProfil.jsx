@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {
-  userProfil,
-  setDataStorage,
-  setFirstName,
-  setLastName,
-  logout,
-} from '../slices/authSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleUser,
   faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
+// api
+import { userProfil } from '../services/api';
+// slice
+import {
+  setDataStorage,
+  setFirstName,
+  setLastName,
+  logout,
+} from '../slices/authSlice';
 // components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -20,21 +22,22 @@ import Footer from '../components/Footer';
 import styles from '../styles/UserProfil.module.css';
 
 const UserProfil = () => {
-  const dispatch = useDispatch();
-  let firstName = JSON.parse(localStorage.getItem('firstName'));
-  let lastName = JSON.parse(localStorage.getItem('lastName'));
-  let token = JSON.parse(localStorage.getItem('token'));
-  let inputFirstName = document.getElementById('firstName');
-  let inputLastName = document.getElementById('lastName');
-
   const [firstNames, setFirstNames] = useState('');
   const [lastNames, setLastNames] = useState('');
+
+  const firstName = JSON.parse(localStorage.getItem('firstName'));
+  const lastName = JSON.parse(localStorage.getItem('lastName'));
+  const token = JSON.parse(localStorage.getItem('token'));
+
+  const inputFirstName = document.getElementById('firstName');
+  const inputLastName = document.getElementById('lastName');
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleEditName = async (e) => {
     e.preventDefault();
-    const response = await userProfil(firstName, lastName, token);
-    console.log(response);
+    const response = await userProfil(firstNames, lastNames, token);
     if (response != null) {
       dispatch(setDataStorage(response));
       dispatch(setFirstName(firstNames));
@@ -47,23 +50,23 @@ const UserProfil = () => {
     }
   };
 
-  function isLogout() {
+  const handleLogout = () => {
     dispatch(logout());
     navigate('/');
-  }
+  };
 
   return (
     <>
       <header>
         <Header />
         <nav className={styles.mainnav}>
-          <Link className={styles.mainnavitem} to="/user">
+          <Link className={styles.mainnavitem} to="/profil">
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
             {firstName + ' '}
           </Link>
-          <button className={styles.mainnavitembutton} onClick={isLogout}>
+          <button className={styles.mainnavitembutton} onClick={handleLogout}>
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faRightFromBracket} />
             </i>

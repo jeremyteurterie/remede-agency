@@ -2,39 +2,84 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3001/api/v1';
 
-export async function userLogin(email, password) {
+export const userLogin = async (email, password, checkbox) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let responses = '';
+
   try {
     const response = await axios.post(
-      `${API_URL}/user/login`,
-      { email, password },
-      { headers: { 'Content-Type': 'application/json' } }
+      API_URL + '/user/login',
+      {
+        email: email,
+        password: password,
+      },
+      config
     );
+
     if (response.status === 200) {
-      return response.data.body.token;
+      if (checkbox) {
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+      } else {
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+      }
+      responses = response.data.body.token;
+      localStorage.setItem('token', JSON.stringify(responses));
+
+      return getToken(responses);
     } else {
-      return null;
+      responses = null;
     }
   } catch (error) {
-    console.log(error);
-    return null;
+    responses = null;
   }
-}
 
-export async function userProfile() {
+  return responses;
+};
+
+export const getToken = async (token) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   try {
-    const response = await axios.post(
-      `${API_URL}/user/profile`,
-      {},
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${response}`,
-        },
-      }
-    );
-    return response.data;
+    const response = await axios.post(`${API_URL}/user/profile`, {}, config);
+    const data = response.data.body;
+    return data;
   } catch (error) {
-    console.log(error);
     return null;
   }
-}
+};
+
+export const userProfil = async (firstName, lastName, token) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const { data, status } = await axios.put(
+      `${API_URL}/user/profile`,
+      { firstName, lastName },
+      config
+    );
+
+    if (status === 200) {
+      return data.body;
+    }
+    return null;
+  } catch (error) {
+    return null;
+  }
+};

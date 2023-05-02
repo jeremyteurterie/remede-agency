@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 // routes
 import Rooter from './router';
-// module redux
-import { Provider } from 'react-redux';
 // store redux
 import store from './store';
 // styles

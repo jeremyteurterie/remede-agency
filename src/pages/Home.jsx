@@ -11,6 +11,10 @@ import iconchat from '../assets/img/icon-chat.png';
 import iconmoney from '../assets/img/icon-money.png';
 import iconsecurity from '../assets/img/icon-security.png';
 
+/**
+ * Renders the Home component with header, main and footer sections.
+ * @returns {JSX.Element} Home component
+ */
 const Home = () => {
   return (
     <>

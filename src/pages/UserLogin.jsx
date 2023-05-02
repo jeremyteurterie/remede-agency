@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+// api
+import { userLogin } from '../services/api';
+// slice
 import {
   setDataStorage,
-  userLogin,
   setConnected,
   setFirstName,
   setLastName,
   setDataState,
-  removeError,
-  setError,
   setEmail,
   setPassword,
 } from '../slices/authSlice';
-// import { toast } from 'react-toastify';
-// slice
 // components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -24,40 +22,48 @@ import Footer from '../components/Footer';
 import styles from '../styles/UserLogin.module.css';
 
 const UserLogin = () => {
-  const [msgError, setMsgError] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userEmail = useSelector((state) => state.login.email);
-  const userPassword = useSelector((state) => state.login.password);
-  let emailStorage = localStorage.getItem('email');
-  let passwordStorage = localStorage.getItem('password');
+  const [error, setError] = useState('');
 
-  async function checkEmailStorage(emailStorage) {
-    if (emailStorage && passwordStorage != null) {
-      dispatch(setEmail(emailStorage));
-      dispatch(setPassword(passwordStorage));
+  const { email: userEmail, password: userPassword } = useSelector(
+    (state) => state.login
+  );
+  const storedEmail = localStorage.getItem('email');
+  const storedPassword = localStorage.getItem('password');
+
+  const storeUserCredentials = useCallback((email, password) => {
+    if (email && password) {
+      dispatch(setEmail(email));
+      dispatch(setPassword(password));
     }
-  }
-  checkEmailStorage(emailStorage);
-  async function checkForm(e) {
+  }, []);
+
+  useEffect(() => {
+    storeUserCredentials(storedEmail, storedPassword);
+  }, []);
+
+  const handleLoginFormSubmit = async (e) => {
     e.preventDefault();
     const checkBox = document.getElementById('remember-me');
     const response = await userLogin(userEmail, userPassword, checkBox.checked);
+
+    if (!userEmail || !userPassword) {
+      setError('Invalid email or password!');
+    }
+
     if (response != null) {
+      const { firstName, lastName } = response;
       dispatch(setDataStorage(response));
       dispatch(setDataState(localStorage.getItem('data')));
       dispatch(setConnected(true));
-      dispatch(setFirstName(response.firstName));
-      dispatch(setLastName(response.lastName));
-      dispatch(removeError(false));
-      setMsgError(false);
+      dispatch(setFirstName(firstName));
+      dispatch(setLastName(lastName));
       navigate('/profil');
     } else {
-      dispatch(setError(true));
       dispatch(setConnected(false));
-      setMsgError(true);
     }
-  }
+  };
 
   return (
     <>
@@ -79,7 +85,7 @@ const UserLogin = () => {
               <FontAwesomeIcon icon={faCircleUser} />
             </i>
             <h1>Sign In</h1>
-            <form onSubmit={checkForm}>
+            <form onSubmit={handleLoginFormSubmit}>
               <div className={styles.inputwrapper}>
                 <label htmlFor="username">Username</label>
                 <input
@@ -90,10 +96,7 @@ const UserLogin = () => {
                   onChange={(e) => {
                     dispatch(setEmail(e.target.value));
                   }}
-                  // value={email}
-                  // onChange={onChange}
                 />
-                <div className="email error"></div>
               </div>
               <div className={styles.inputwrapper}>
                 <label htmlFor="password">Password</label>
@@ -105,8 +108,6 @@ const UserLogin = () => {
                   onChange={(e) => {
                     dispatch(setPassword(e.target.value));
                   }}
-                  // value={password}
-                  // onChange={onChange}
                 />
                 <div className="password error"></div>
               </div>
@@ -114,7 +115,7 @@ const UserLogin = () => {
                 <input type="checkbox" id="remember-me" />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
-              {/* {errorField && <p>{errorField}</p>} */}
+              <div className={styles.error}>{error}</div>
               <button className={styles.signinbutton} type="submit">
                 Sign In
               </button>
