@@ -10,11 +10,10 @@ All notable changes to this project will be documented in this file.
  - Added an authenticate feature.
  - Implemented Redux state management.
  - Added a Readme.md file.
- - Deleted dependencies on Redux 4.2.1.
 
  Deleted
 
- - Dependencies (Redux 4.2.1)
+ - Deleted dependencies on Redux 4.2.1.
 
 
  [0.3.0] - 2023-04-14
