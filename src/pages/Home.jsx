@@ -1,5 +1,4 @@
-import React from 'react';
-// modules
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
@@ -12,13 +11,17 @@ import iconchat from '../assets/img/icon-chat.png';
 import iconmoney from '../assets/img/icon-money.png';
 import iconsecurity from '../assets/img/icon-security.png';
 
+/**
+ * Renders the Home component with header, main and footer sections.
+ * @returns {JSX.Element} Home component
+ */
 const Home = () => {
   return (
     <>
       <header>
         <Header />
         <nav className={styles.mainnav}>
-          <Link className={styles.mainnavitem} to="/connexion">
+          <Link to="/login" className={styles.mainnavitem}>
             <i className={styles.signinicon}>
               <FontAwesomeIcon icon={faCircleUser} />
             </i>

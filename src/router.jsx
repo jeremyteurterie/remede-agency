@@ -6,17 +6,22 @@ import {
 } from 'react-router-dom';
 // pages
 import Home from './pages/Home';
-import UserConnexion from './pages/UserConnexion';
+import UserLogin from './pages/UserLogin';
 import UserProfil from './pages/UserProfil';
 import Error404 from './pages/Error404';
 
-const router = createBrowserRouter(
+/**
+ * The router configuration for the app.
+ *
+ * @type {BrowserRouter}
+ */
+const Routes = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Home />} errorElement={<Error404 />}></Route>
       <Route
-        path="/connexion"
-        element={<UserConnexion />}
+        path="/login"
+        element={<UserLogin />}
         errorElement={<Error404 />}
       ></Route>
       <Route
@@ -29,8 +34,13 @@ const router = createBrowserRouter(
   )
 );
 
+/**
+ * The app's router component.
+ *
+ * @returns {JSX.Element} The router component.
+ */
 function Router() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={Routes} />;
 }
 
 export default Router;

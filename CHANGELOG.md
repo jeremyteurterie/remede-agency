@@ -1,7 +1,20 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [Released v1.0.0]
+
+ [1.0.0] - 2023-05-02
+
+ Added
+
+ - Added an authenticate feature.
+ - Implemented Redux state management.
+ - Added a Readme.md file.
+
+ Deleted
+
+ - Deleted dependencies on Redux 4.2.1.
+
 
  [0.3.0] - 2023-04-14
 

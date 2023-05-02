@@ -1,15 +1,18 @@
 import React from 'react';
-// modules
 import { Link } from 'react-router-dom';
 // styles & assets
 import styles from '../styles/Header.module.css';
 import logo from '../assets/img/argentBankLogo.png';
 
+/**
+ * Header component displaying the site's logo and navigation bar.
+ * @returns {JSX.Element} React element representing the Header component.
+ */
 const Header = () => {
   return (
     <header>
       <nav className={styles.mainnav}>
-        <Link className={styles.mainnavlogo} to="/">
+        <Link to="/" className={styles.mainnavlogo}>
           <img
             className={styles.mainnavlogoimage}
             src={logo}
