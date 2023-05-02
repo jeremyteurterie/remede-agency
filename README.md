@@ -26,7 +26,7 @@ npm run populate-db
 ```
 Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
 
-### Populated Database Data
+### 1.3 Populated Database Data
 Once you run the `populate-db` script, you should have two users in your database:
 
 #### Tony Stark
@@ -43,7 +43,7 @@ Once you run the `populate-db` script, you should have two users in your databas
 - Email: `steve@rogers.com`,
 - Password: `password456`
 
-### API Documentation
+### 1.4 API Documentation
 To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
 
 # 2. Frontend
