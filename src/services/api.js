@@ -2,6 +2,14 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3001/api/v1';
 
+/**
+ * Login user and get token
+ *
+ * @param {string} email - The email of the user
+ * @param {string} password - The password of the user
+ * @param {boolean} checkbox - Checkbox value to store user credentials in localStorage
+ * @returns {Promise<string|null>} The token or null if login fails
+ */
 export const userLogin = async (email, password, checkbox) => {
   const config = {
     headers: {
@@ -43,6 +51,12 @@ export const userLogin = async (email, password, checkbox) => {
   return responses;
 };
 
+/**
+ * Get user data using token
+ *
+ * @param {string} token - The user's token
+ * @returns {Promise<Object|null>} The user's data or null if request fails
+ */
 export const getToken = async (token) => {
   const config = {
     headers: {
@@ -60,6 +74,14 @@ export const getToken = async (token) => {
   }
 };
 
+/**
+ * Update user profile
+ *
+ * @param {string} firstName - The new first name for the user
+ * @param {string} lastName - The new last name for the user
+ * @param {string} token - The user's token
+ * @returns {Promise<Object|null>} The updated user profile or null if request fails
+ */
 export const userProfil = async (firstName, lastName, token) => {
   const config = {
     headers: {

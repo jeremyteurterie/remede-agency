@@ -21,6 +21,10 @@ import Footer from '../components/Footer';
 // styles
 import styles from '../styles/UserProfil.module.css';
 
+/**
+ * Component representing the user profile page.
+ * @return {JSX.Element} The JSX code representing the user profile page.
+ */
 const UserProfil = () => {
   const [firstNames, setFirstNames] = useState('');
   const [lastNames, setLastNames] = useState('');
@@ -35,6 +39,10 @@ const UserProfil = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  /**
+   * Handler function for the 'Edit Name' button.
+   * @param {Event} e - The event object.
+   */
   const handleEditName = async (e) => {
     e.preventDefault();
     const response = await userProfil(firstNames, lastNames, token);
@@ -50,6 +58,9 @@ const UserProfil = () => {
     }
   };
 
+  /**
+   * Handler function for the 'Logout' button.
+   */
   const handleLogout = () => {
     dispatch(logout());
     navigate('/');

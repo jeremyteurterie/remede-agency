@@ -9,6 +9,13 @@ let initialState = {
   connected: false,
 };
 
+/**
+ * A slice of the Redux store for handling user authentication.
+ * @typedef {Object} AuthSlice
+ * @property {string} name - The name of the slice.
+ * @property {Object} initialState - The initial state of the slice.
+ * @property {Function} reducers - An object containing reducer functions that update the state.
+ */
 const authSlice = createSlice({
   name: 'login',
   initialState,

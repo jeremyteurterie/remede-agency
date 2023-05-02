@@ -21,6 +21,10 @@ import Footer from '../components/Footer';
 // styles
 import styles from '../styles/UserLogin.module.css';
 
+/**
+ * Component for user login page
+ * @return {JSX.Element} The JSX code representing the user login page.
+ */
 const UserLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,6 +36,11 @@ const UserLogin = () => {
   const storedEmail = localStorage.getItem('email');
   const storedPassword = localStorage.getItem('password');
 
+  /**
+   * Store user email and password in state
+   * @param {string} email - The user email
+   * @param {string} password - The user password
+   */
   const storeUserCredentials = useCallback((email, password) => {
     if (email && password) {
       dispatch(setEmail(email));
@@ -43,6 +52,10 @@ const UserLogin = () => {
     storeUserCredentials(storedEmail, storedPassword);
   }, []);
 
+  /**
+   * Handles the form submission and logs in the user
+   * @param {Event} e - The form submission event
+   */
   const handleLoginFormSubmit = async (e) => {
     e.preventDefault();
     const checkBox = document.getElementById('remember-me');
