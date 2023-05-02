@@ -2,6 +2,7 @@
 Use an API for a bank user account with React.
 ##
 ![LOGO](./public/logo2.png)
+##
 # 1. Backend
 - The repository is available here [Backend](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API).
 
