@@ -33,23 +33,21 @@ const UserLogin = () => {
   const { email: userEmail, password: userPassword } = useSelector(
     (state) => state.login
   );
+
   const storedEmail = localStorage.getItem('email');
   const storedPassword = localStorage.getItem('password');
 
   /**
-   * Store user email and password in state
-   * @param {string} email - The user email
-   * @param {string} password - The user password
+   * useEffect hook that checks for stored email and password and dispatches setEmail and setPassword actions.
+   * @function
+   * @param {Array} dependencies - An empty array that represents the dependencies for this effect to run only once on mount.
+   * @returns {undefined} - Does not return anything.
    */
-  const storeUserCredentials = useCallback((email, password) => {
-    if (email && password) {
-      dispatch(setEmail(email));
-      dispatch(setPassword(password));
-    }
-  }, []);
-
   useEffect(() => {
-    storeUserCredentials(storedEmail, storedPassword);
+    if (storedEmail && storedPassword) {
+      dispatch(setEmail(storedEmail));
+      dispatch(setPassword(storedPassword));
+    }
   }, []);
 
   /**
