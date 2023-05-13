@@ -1,7 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Released v1.0.0]
+## [Released v1.1.0]
+
+ [1.1.0] - 2023-05-13
+
+ Added
+
+ - Backend.
+ - Project restructuration.
+ - Edit readme.
 
  [1.0.0] - 2023-05-02
 
