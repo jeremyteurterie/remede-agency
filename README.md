@@ -1,18 +1,19 @@
 # Remede-Agency
 Use an API for a bank user account with React.
 ##
-![LOGO](./public/logo2.png)
+![LOGO](./logo.png)
 ##
+Clone this repository and follow the instructions bellow.
 # 1. Backend
-- The repository is available here [Backend](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API).
 
 ### 1.1 Prerequisites
 - [Node.js v12](https://nodejs.org/en/)
 - [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
+Follow the installation instructions according to your operating system [here](https://www.mongodb.com/docs/manual/administration/install-community/).
+
 ### 1.2 Launching the project
-- Clone the repository ([Backend](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)) on your computer.
-In the project directory run the following commands:
+In the backend folder `/remede-agency/backend` :
 
 ```bash
 # Install dependencies
@@ -47,7 +48,6 @@ Once you run the `populate-db` script, you should have two users in your databas
 To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
 
 # 2. Frontend
-- Clone this repository on your computer.
 
 ### 2.1 Prerequisites
 - [React v18.2.0](https://react.dev/).
@@ -55,9 +55,8 @@ To learn more about how the API works, once you have started your local environm
 - [Axios v1.3.5](https://www.npmjs.com/package/axios).
 
 ### 2.2 Lauching the project
-In the project directory run the following commands:
-- Install the dependencies with the `npm install` command.
-- Run the app with the `npm run dev` command.
+In the frontend folder `/remede-agency/frontend` :
+
 ```bash
 # Install dependencies
 npm install
