@@ -17,7 +17,7 @@ Clone this repository and follow the instructions bellow.
 Follow the installation instructions according to your operating system [here](https://www.mongodb.com/docs/manual/administration/install-community/).
 
 ### 1.2 Launching the project
-In the backend folder `/remede-agency/backend` :
+In the backend folder `/remede-agency/server` :
 
 ```bash
 # Install dependencies
@@ -59,7 +59,7 @@ To learn more about how the API works, once you have started your local environm
 - [Axios v1.3.5](https://www.npmjs.com/package/axios).
 
 ### 2.2 Lauching the project
-In the frontend folder `/remede-agency/frontend` :
+In the frontend folder `/remede-agency/client` :
 
 ```bash
 # Install dependencies
