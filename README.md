@@ -1,7 +1,11 @@
 # Remede-Agency
 Use an API for a bank user account with React.
 ##
-![LOGO](./logo.png)
+
+<p align="center">
+  <img src="./logo.png" />
+</p>
+
 ##
 Clone this repository and follow the instructions bellow.
 # 1. Backend
